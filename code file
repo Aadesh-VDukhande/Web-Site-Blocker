@@ -1,0 +1,39 @@
+
+from datetime import datetime         # He Date and Time chya 'datetime'Libary la import karnar 
+host_path = "C:/Windows/System32/drivers/etc/hosts"          # Ha Host path ahe jikde internet chya File save ahe
+redirect = "127.0.0.1 "               # Host fILE MADHALA ip ADDRESS ahe
+website_list = ["www.facebook.com","www.instagram.com","www.twitter.com"]    #List of web site that will block
+
+start_date = datetime(2020,8,6)          # Starting peroid of web site blocker
+
+end_date = datetime(2020,8,31)           # Ending peroid of web site blocker
+
+today_date = datetime(datetime.now().year,datetime.now().month,datetime.now().day)             
+
+
+while True:
+    if start_date <= today_date < end_date :
+        with open (host_path , "r+") as file :
+            content = file.read()
+            for site in website_list :
+                if site in content :
+                    pass
+                else:
+                    file.write(redirect+""+site+"\n")
+        print("Will site are Block")
+        break
+    else :
+        with open(host_path,"r+") as file :
+            content = file.readlines()
+            file.seek(0)
+            for line in content:
+                if not any (site in line for site in website_list):
+                    file.write(line)
+                file.truncate()
+        print("All Sites are Unblocked")
+        break
+                    
+                
+
+
+        
